@@ -156,19 +156,54 @@
 					//
 					//Exercise: Modify this code to remove the correct label each time!
 					//
-					svg.selectAll("text")
-					   .data(dataset, key)		//Bind data with custom key function
-					   .transition()
-					   .duration(500)
-					   .text(function(d) {
-					   		return d.value;
-					   })
-					   .attr("x", function(d, i) {
+
+					var label = svg.selectAll("text")  //select all texts
+						.data(dataset, key);										//re-bind data to existing texts, return the
+																							//'update' selection, label is now the update selection
+
+
+					//enter
+					label.enter()            //references the enter selection (a subset of the update selection)
+						.append("text")					//creates a new text
+						.attr("x", w)			//sets initial x position of label beyond far right of svg
+						.attr("y", function(d) {  //sets y value based on updated yScale
+							return h - yScale(d.value);
+						})
+						.attr("fill", "white");
+
+						//update
+					label.transition() 		// initiate a transition on all elements in the update selection
+						.duration(800)
+			   		.attr("x", function(d, i) {
 							return xScale(i) + xScale.rangeBand() / 2;
 					   })
 					   .attr("y", function(d) {
 							return h - yScale(d.value) + 14;
 					   });
+
+					   //exit
+					  label.exit()
+					  .transition()
+					  .duration(500)
+					  .attr("x", -xScale.rangeBand()) // <-- exit stage left
+					  .remove();
+
+
+
+
+					// svg.selectAll("text")
+					//    .data(dataset, key)		//Bind data with custom key function
+					//    .transition()
+					//    .duration(500)
+					//    .text(function(d) {
+					//    		return d.value;
+					//    })
+					//    .attr("x", function(d, i) {
+					// 		return xScale(i) + xScale.rangeBand() / 2;
+					//    })
+					//    .attr("y", function(d) {
+					// 		return h - yScale(d.value) + 14;
+					//    });
 
 				});
 

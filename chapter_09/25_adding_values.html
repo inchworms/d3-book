@@ -82,7 +82,7 @@
 
 					//Add one new value to dataset
 					var maxValue = 25;
-					var newNumber = Math.floor(Math.random() * maxValue);	//New random integer (0-24)
+					var newNumber = Math.floor(Math.random() * maxValue + 1);	//New random integer (0-24)
 					dataset.push(newNumber);			 			 		//Add new number to array
 					
 					//Update scale domains
@@ -129,19 +129,40 @@
 					//
 					//Exercise: Modify this code to add a new label each time a new bar is added!
 					//
-					svg.selectAll("text")
-					   .data(dataset)
-					   .transition()
-					   .duration(500)
-					   .text(function(d) {
-					   		return d;
-					   })
-					   .attr("x", function(d, i) {
+
+					var label = svg.selectAll("text")  //select all texts
+						.data(dataset);										//re-bind data to existing texts, return the
+																							//'update' selection, label is now the update selection
+					//enter
+					label.enter()            //references the enter selection (a subset of the update selection)
+						.append("text")					//creates a new text
+						.attr("x", w)			//sets initial x position of label beyond far right of svg
+						.attr("y", function(d) {  //sets y value based on updated yScale
+							return h - yScale(d);
+						})
+						.attr("fill", "white");
+
+
+					//update
+					label.transition() 		// initiate a transition on all elements in the update selection
+						.duration(800)
+						.text(function(d) {
+							return d;
+						})
+						.attr("text-anchor", "middle")
+						.attr("font-family", "sans-serif")
+			   		.attr("font-size", "11px")
+			   		.attr("fill", "white")
+			   		.attr("x", function(d, i) {
 							return xScale(i) + xScale.rangeBand() / 2;
 					   })
 					   .attr("y", function(d) {
 							return h - yScale(d) + 14;
 					   });
+
+
+
+					   
 
 				});
 
