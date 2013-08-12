@@ -85,9 +85,15 @@
 					var maxValue = 100;											//Highest possible new value
 					dataset = [];  						 				 		//Initialize empty array
 					for (var i = 0; i < numValues; i++) {				 		//Loop numValues times
-						var newNumber = Math.floor(Math.random() * maxValue);	//New random integer (0-100)
+						var newNumber = Math.floor(Math.random() * maxValue + 1);	//New random integer (0-100)
 						dataset.push(newNumber);			 			 		//Add new number to array
 					}
+
+					//Variables for random RGB
+					var red = Math.floor(Math.random() * 256);
+					var green = Math.floor(Math.random() * 256);
+
+
 					
 					//Update scale domain
 					//Recalibrate the scale domain, given the new max value in dataset
@@ -108,7 +114,7 @@
 					   		return yScale(d);
 					   })
 					   .attr("fill", function(d) {
-							return "rgb(0, 0, " + (d * 10) + ")";
+							return "rgb(" + red + ", " + green + ", " + (d * 2) + ")";
 					   });
 
 					//Update all labels

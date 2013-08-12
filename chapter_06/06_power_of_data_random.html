@@ -20,7 +20,7 @@
 		<script type="text/javascript">
 
 			var dataset = [];  						 //Initialize empty array
-			for (var i = 0; i < 25; i++) {			 //Loop 25 times
+			for (var i = 0; i < 40; i++) {			 //Loop 25 times
 				var newNumber = Math.random() * 30;  //New random number (0-30)
 				dataset.push(newNumber);			 //Add new number to array
 			}
@@ -33,6 +33,18 @@
 				.style("height", function(d) {
 					var barHeight = d * 5;
 					return barHeight + "px";
+				})
+
+				.style("background-color", function(c) {
+					if (c > 20) {
+						return "darkred";
+					}
+					else if (c < 10) {
+						return "orange";
+					}
+					else {
+						return "lightblue";
+					}
 				});
 			
 		</script>
