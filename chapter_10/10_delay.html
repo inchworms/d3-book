@@ -103,6 +103,24 @@
 				   		return xScale(i);
 				   });
 
+
+				   svg.selectAll("text")
+				   .sort(function(a, b) {
+				   		if (sortOrder) {
+					   		return d3.ascending(a, b);
+				   		} else {
+					   		return d3.descending(a, b);
+				   		}
+				   	})
+				   .transition()
+				   .delay(function(d, i) {
+					   return i * 50;
+				   })
+				   .duration(1000)
+				   .attr("x", function(d, i) {
+				   		return xScale(i) + xScale.rangeBand() /2;
+				   });
+
 			};			
 			
 		</script>
