@@ -8,6 +8,7 @@ class Recipient
 	include DataMapper::Resource
 	property :id, Serial
 	property :global_recipient_id, String
+	property :name, String
 	property :zipcode, String
 	property :admin_area_1, String
 	property :admin_area_2, String

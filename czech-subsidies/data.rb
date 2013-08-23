@@ -8,7 +8,8 @@ recipient_parse = CSV.parse(recipient_txt, :headers => true, :col_sep => ";")
 @recipient_result = []
 recipient_parse.each do |row|
   @recipient_result << {
-  								global_recipient_id: row['globalRecipientId'], 
+  								global_recipient_id: row['globalRecipientId'],
+                  name: row['name'], 
   								zipcode: row['zipcode'], 
   								# town:
   								# countryRecipient: 
@@ -53,7 +54,7 @@ recipient_parse.each do |row|
                 # place_name
                 admin_name_1: row['admin_name_1'],
                 # admin_code_1
-                admin_name_2: row['admin_name_2'],
+                admin_name_2: row['admin_name_2']
                 # admin_code_2
                 # admin_name_3
                 # admin_code_3
@@ -66,17 +67,12 @@ recipient_parse.each do |row|
 geo_area_1_txt = File.read("CZE_adm1.json")
 geo_area_1_parse = JSON.parse(geo_area_1_txt)
 @geo_area_1_result = []
-geo_area_1_parse.each do |row|
-  i = geo_area_1_parse.row['features'].length
-  @geo_area_result << {
-             # -FeatureCollection
-             #  -Feature
-             #  -properties
-             #    ID_0 : 59
-             #    ISO : "CZE"
-                 country_name: row["features"][]["properties"]["NAME_0"],
+geo_area_1_parse["features"].each do |row|
+  @geo_area_1_result << {
+                country_name: row["properties"]["NAME_0"],
                 # ID_1 : 739
-                 admin_area_name: row["features"][]["properties"]["NAME_1"],
+                country_code: row["properties"]["ISO"],
+                admin_area_name: row["properties"]["NAME_1"],
                 # VARNAME_1 : "Budweis|Budejovický|Ceskobudejovický|South Bohemian"
                 # NL_NAME_1 : null
                 # HASC_1 : "CZ.CK"
@@ -88,7 +84,7 @@ geo_area_1_parse.each do |row|
                 # REMARKS_1 : null
                 # Shape_Leng : 6.954809
                 # Shape_Area : 1.230583
-                geometry: row["features"][i]["geometry"]
+                geometry: row["geometry"],
                 # Polygon
                 # coordinates
     }
@@ -98,7 +94,7 @@ geo_area_1_parse.each do |row|
 p @recipient_result[0]
 p @payment_result[0]
 p @zipcode_result[0]
-p @geo_area_result[0]
+p @geo_area_1_result[0]
 
 @total = 0
 
