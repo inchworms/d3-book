@@ -2,7 +2,7 @@ require "rubygems"
 require "sequel"
 
 # connect to an in-memory database
-DB = Sequel.sqlite
+DB = Sequel.postgres("test")
 
 # create an items table
 DB.create_table :items do
