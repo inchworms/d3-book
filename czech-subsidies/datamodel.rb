@@ -26,12 +26,14 @@ class AdminArea1
 	property :id, Serial
 	property :name, String
 	property :country_id, Integer
+	# property :geo polygon data
 end
 
 class AdminArea2
 	property :id, Serial
 	property :name, String
 	property :admin_area_1_id, Integer
+	# property :geo polygon data
 end
 
 class Country
