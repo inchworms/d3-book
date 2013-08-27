@@ -25,44 +25,44 @@ recipient_parse.each do |row|
   								# lat: 
   								# lng:
                 }
-  end
+end
 
-  payment_txt = File.read("cz_payment.txt")
-  payment_parse = CSV.parse(payment_txt, :headers => true, :col_sep => ";")
-  @payment_result = []
-  payment_parse.each do |row|
-    @payment_result << {
-                # paymentId
-                # globalPaymentId
-                global_recipient_id: row['globalRecipientId'],
-                # globalRecipientIdx
-                # globalSchemeId
-                amount_euro: row['amountEuro'],
-                # amountNationalCurrency
-                year: row['year']
-                # countryPayment
-    }
-  end
+payment_txt = File.read("cz_payment.txt")
+payment_parse = CSV.parse(payment_txt, :headers => true, :col_sep => ";")
+@payment_result = []
+payment_parse.each do |row|
+  @payment_result << {
+              # paymentId
+              # globalPaymentId
+              global_recipient_id: row['globalRecipientId'],
+              # globalRecipientIdx
+              # globalSchemeId
+              amount_euro: row['amountEuro'],
+              # amountNationalCurrency
+              year: row['year']
+              # countryPayment
+  }
+end
 
-  zipcode_txt = File.read("cz_zipcode.csv")
-  zipcode_parse = CSV.parse(zipcode_txt, :headers => true)
-  @zipcode_result = []
-  zipcode_parse.each do |row|
-    @zipcode_result << {
-                country_code: row['country_code'],
-                zipcode: row['zipcode'],
-                # place_name
-                admin_name_1: row['admin_name_1'],
-                # admin_code_1
-                admin_name_2: row['admin_name_2']
-                # admin_code_2
-                # admin_name_3
-                # admin_code_3
-                # latitude
-                # longitude
-                # accuracy
-    }
-  end
+zipcode_txt = File.read("cz_zipcode.csv")
+zipcode_parse = CSV.parse(zipcode_txt, :headers => true)
+@zipcode_result = []
+zipcode_parse.each do |row|
+  @zipcode_result << {
+              country_code: row['country_code'],
+              zipcode: row['zipcode'],
+              # place_name
+              admin_name_1: row['admin_name_1'],
+              # admin_code_1
+              admin_name_2: row['admin_name_2']
+              # admin_code_2
+              # admin_name_3
+              # admin_code_3
+              # latitude
+              # longitude
+              # accuracy
+  }
+end
 
 geo_area_1_txt = File.read("CZE_adm1.json")
 geo_area_1_parse = JSON.parse(geo_area_1_txt)
