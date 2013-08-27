@@ -30,7 +30,10 @@ end
 payment = DB[:payment]
 
 # populate the table
-payment.insert(:global_recipient_id => @payment_result[0][:global_recipient_id], :amount_euro => @payment_result[0][:amount_euro])
-
+i = 0
+while i < 5
+  payment.insert(:global_recipient_id => @payment_result[i][:global_recipient_id], :amount_euro => @payment_result[i][:amount_euro])
+  i += 1
+end
 # print out the number of records
 puts "Payment count: #{payment.count}"
