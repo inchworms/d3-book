@@ -17,4 +17,4 @@ DB.create_table :recipients do
 end
 
 # create a dataset from the recipients table
-items = DB[:recipients]
+# items = DB[:recipients]
