@@ -18,6 +18,9 @@ end
 # connect to an in-memory database
 DB = Sequel.postgres("test")
 
+# drop table payment if exists?
+DB.drop_table?(:payment)
+
 # create an items table
 DB.create_table :payment do
   primary_key :id
