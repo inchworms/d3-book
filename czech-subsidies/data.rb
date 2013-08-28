@@ -3,27 +3,30 @@ require 'csv'
 require 'bigdecimal'
 require 'json'
 
+
+beginning = Time.now
+
 recipient_txt = File.read("cz_recipient.txt")
 recipient_parse = CSV.parse(recipient_txt, :headers => true, :col_sep => ";")
 @recipient_result = []
 recipient_parse.each do |row|
   @recipient_result << {
-  								global_recipient_id: row['globalRecipientId'],
+                  global_recipient_id: row['globalRecipientId'],
                   name: row['name'], 
-  								zipcode: row['zipcode'], 
-  								# town:
-  								# countryRecipient: 
-  								# countryPayment:
-  								admin_area_1: row['geo1'], 
-  								admin_area_2: row['geo2'], 
-  								# geo3:
-  								# geo4:
-  								# geo1NationalLanguage:
-  								# geo2NationalLanguage:
-  								# geo3NationalLanguage:
-  								# geo4NationalLanguage:
-  								# lat: 
-  								# lng:
+                  zipcode: row['zipcode'], 
+                  # town:
+                  # countryRecipient: 
+                  # countryPayment:
+                  admin_area_1: row['geo1'], 
+                  admin_area_2: row['geo2'], 
+                  # geo3:
+                  # geo4:
+                  # geo1NationalLanguage:
+                  # geo2NationalLanguage:
+                  # geo3NationalLanguage:
+                  # geo4NationalLanguage:
+                  # lat: 
+                  # lng:
                 }
 end
 
@@ -91,10 +94,11 @@ geo_area_1_parse["features"].each do |row|
   end
 
 
-p @recipient_result[0]
-p @payment_result[0]
-p @zipcode_result[0]
-p @geo_area_1_result[0]
+# p @recipient_result[0]
+# p @payment_result[0]
+# p @zipcode_result[0]
+# p @geo_area_1_result[0]
+p @payment_result.length
 
 @total = 0
 
@@ -127,4 +131,5 @@ end
 
 p @total.to_s("F")
 
+puts "Time elapsed #{Time.now - beginning} seconds"
 
