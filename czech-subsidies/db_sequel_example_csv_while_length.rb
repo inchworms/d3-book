@@ -36,7 +36,7 @@ payment = DB[:payment]
 
 # populate the table
 i = 0
-while i < 5
+while i < @payment_result.length
   payment.insert(:global_recipient_id => @payment_result[i][:global_recipient_id], :amount_euro => @payment_result[i][:amount_euro])
   i += 1
 end
